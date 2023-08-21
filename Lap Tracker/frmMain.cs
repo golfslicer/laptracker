@@ -33,17 +33,21 @@ namespace Lap_Tracker {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            refreshCameras();
-            metroComboBox_Cameras.SelectedIndex = 0;
-            finalFrame = new VideoCaptureDevice();
+            try {
+                refreshCameras();
+                metroComboBox_Cameras.SelectedIndex = 0;
+                finalFrame = new VideoCaptureDevice();
 
-            //configure distance textbox to only allow numbers
-            metroTextBox_LapDistance.KeyPress += new KeyPressEventHandler(metroTextBox_LapDistance_Change);
+                //configure distance textbox to only allow numbers
+                metroTextBox_LapDistance.KeyPress += new KeyPressEventHandler(metroTextBox_LapDistance_Change);
 
-            this.FormClosing += new FormClosingEventHandler(Form1_Closing);
+                this.FormClosing += new FormClosingEventHandler(Form1_Closing);
 
-            //configure DataTable
-            setupRaceDataTable();
+                //configure DataTable
+                setupRaceDataTable();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Form1_Closing(object sender, FormClosingEventArgs e) {
@@ -114,6 +118,7 @@ namespace Lap_Tracker {
         }
 
         private void timer_CamRefresh_Tick(object sender, EventArgs e) {
+            //This function configures the timer to update the picture box and sets the last scanned code.
             try { 
                 BarcodeReader qrReader = new BarcodeReader();
                 Result result = qrReader.Decode((Bitmap)pictureBox_Barcode.Image);

@@ -1,0 +1,24 @@
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\Lap Tracker.exe.config
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\Lap Tracker.exe
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\Lap Tracker.pdb
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.Video.DirectShow.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.Video.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\MetroFramework.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\MetroFramework.Fonts.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\zxing.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\zxing.presentation.dll
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.Video.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\AForge.Video.DirectShow.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\zxing.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\x64\Debug\zxing.presentation.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.csproj.AssemblyReference.cache
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.csproj.SuggestedBindingRedirects.cache
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap_Tracker.frmMain.resources
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap_Tracker.Properties.Resources.resources
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.csproj.GenerateResource.cache
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.csproj.CoreCompileInputs.cache
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.csproj.CopyComplete
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.exe
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\x64\Debug\Lap Tracker.pdb

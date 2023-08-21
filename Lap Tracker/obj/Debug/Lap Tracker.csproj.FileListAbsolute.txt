@@ -22,3 +22,8 @@ C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\Debug\zxing.present
 C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.csproj.CopyComplete
 C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.exe
 C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.pdb
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\Debug\Lap Tracker.exe.manifest
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\bin\Debug\Lap Tracker.application
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.TrustInfo.xml
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.exe.manifest
+C:\Users\cscott\source\repos\lwlc.laptracker\Lap Tracker\obj\Debug\Lap Tracker.application
