@@ -15,6 +15,7 @@ using ZXing;
 using ZXing.Aztec;
 using System.Threading;
 using System.IO;
+using System.Media;
 
 namespace Lap_Tracker {
     public partial class frmMain : MetroFramework.Forms.MetroForm {
@@ -27,12 +28,15 @@ namespace Lap_Tracker {
         DataSet currentRaceDataSet;
         int lapDistance = 0;
         bool exported = false;
+        bool imported = false;
+        bool lapSound = false;
 
         public frmMain() {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            //this function sets up the form and program.
             try {
                 refreshCameras();
                 metroComboBox_Cameras.SelectedIndex = 0;
@@ -43,16 +47,19 @@ namespace Lap_Tracker {
 
                 this.FormClosing += new FormClosingEventHandler(Form1_Closing);
 
+                metroTile_ImportExport.Text = "Import";
+
                 //configure DataTable
                 setupRaceDataTable();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in Form1_Load. Error Message: " + ex.Message);
             }
         }
 
         private void Form1_Closing(object sender, FormClosingEventArgs e) {
             //this function runs when the program is exiting and asks whether to save.
             try {
+                finalFrame.Stop();
                 if (exported == false) {
                     //we haven't saved. Check they want to exit. 
                     DialogResult closingWithOutSave = MessageBox.Show("Are you sure you want to close without exporting the results?", "WARNING", MessageBoxButtons.YesNo);
@@ -65,7 +72,7 @@ namespace Lap_Tracker {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in Form1_Closing. Error Message: " + ex.Message);
             }
         }
 
@@ -77,35 +84,13 @@ namespace Lap_Tracker {
                     metroComboBox_Cameras.Items.Add(cam.Name);
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in refreshCameras. Error Message: " + ex.Message);
             }
         }
 
         private void metroTile_StartRace_Click(object sender, EventArgs e) {
-            //this function will kick off the camera process, setup the datagrid and enable the timer
-            try {
-                //setup Video Capture
-                finalFrame = new VideoCaptureDevice(captureDevice[metroComboBox_Cameras.SelectedIndex].MonikerString);
-                finalFrame.NewFrame += new NewFrameEventHandler(finalFrame_NewFrame);
-                finalFrame.Start();
-
-
-                //setup DataGrid
-                bindData();
-
-                //configure start/stop buttons.
-                metroTile_StopRace.Enabled = true;
-                metroTrackBar_LapDistance.Enabled = false;
-
-                //Pause for 2 seconds to allow camera feed to start.
-                Thread.Sleep(2000);
-
-                //Enable timer so scanning can commence.
-                timer_CamRefresh.Enabled = true;
-                timer_CamRefresh.Start();
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
+            //this function starts the race.
+            startRace();
         }
 
         private void finalFrame_NewFrame(object sender, NewFrameEventArgs eventArgs) {
@@ -113,7 +98,7 @@ namespace Lap_Tracker {
             try {
                 pictureBox_Barcode.Image = (Bitmap)eventArgs.Frame.Clone();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in finalFrame_NewFrame. Error Message: " + ex.Message);
             }
         }
 
@@ -121,11 +106,19 @@ namespace Lap_Tracker {
             //This function configures the timer to update the picture box and sets the last scanned code.
             try { 
                 BarcodeReader qrReader = new BarcodeReader();
+
+                if (pictureBox_Barcode.Image == null) {
+                    timer_CamRefresh.Enabled = false;
+                    stopRace();
+                    MessageBox.Show("There may be an issue with the camera. Please try to stop the race. If this doesn't work, close the app, disconnect then reconnect the camera and try again.");         
+                    return; 
+                }
+
                 Result result = qrReader.Decode((Bitmap)pictureBox_Barcode.Image);
             
                 if (result == null) { return; }
+
                 string decoded = result.ToString().Trim();
-                //MessageBox.Show(decoded);
                 if (decoded != "") {
                     //check if last scan time was within 10 seconds and the same racer
                     DateTime now = DateTime.Now;
@@ -143,15 +136,13 @@ namespace Lap_Tracker {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in timer_CamRefresh_Ticker. Error Message: " + ex.Message);
             }
         }
 
         private void metroTile_StopRace_Click(object sender, EventArgs e) {
-            timer_CamRefresh.Enabled = false;
-            timer_CamRefresh.Stop();
-            metroTile_StopRace.Enabled = false;
-            metroTrackBar_LapDistance.Enabled = true;
+            //this function stops the race.
+            stopRace();
         }
 
         private void setupRaceDataTable() {
@@ -191,7 +182,7 @@ namespace Lap_Tracker {
                 currentRaceDataSet = new DataSet();
                 currentRaceDataSet.Tables.Add(currentRaceDataTable);
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in setupRaceDataTable. Error Message: " + ex.Message);
             }
         }
 
@@ -203,7 +194,7 @@ namespace Lap_Tracker {
 
                 dataGridView1.DataSource = bs;
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in bindData. Error Message: " + ex.Message);
             }
         }
 
@@ -237,10 +228,15 @@ namespace Lap_Tracker {
                     currentRaceDataTable.Rows.Add(dr);
                 }
 
+                if (lapSound == true) {
+                    //play sound
+                    SystemSounds.Exclamation.Play();
+                }
+
                 //refresh datagridview
                 dataGridView1.Refresh();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in recordLap. Error Message: " + ex.Message);
             }
 
         }
@@ -254,7 +250,7 @@ namespace Lap_Tracker {
                     ret = int.TryParse(row[1].ToString(), out ret) ? ret : 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in getCurrentLaps. Error Message: " + ex.Message);
             }
             return ret;
         }
@@ -268,7 +264,7 @@ namespace Lap_Tracker {
                     ret = int.TryParse(row[2].ToString(), out ret) ? ret : 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in getCurrentDistance. Error Message: " + ex.Message);
             }
             return ret;
         }
@@ -288,21 +284,28 @@ namespace Lap_Tracker {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in getRiderExists. Error Message: " + ex.Message);
             }
             return false;
         }
 
         private void metroTrackBar_LapDistance_Scroll(object sender, ScrollEventArgs e) {
+            //this function adjusts the lap distance based on the slider value.
             lapDistance = metroTrackBar_LapDistance.Value;
             metroTextBox_LapDistance.Text = lapDistance.ToString();
         }
 
         private void metroTile_Export_Click(object sender, EventArgs e) {
-            exportData();
+            //this function checks whether to import or export.
+            if (metroTile_ImportExport.Text == "Import") {
+                importData();
+            } else if (metroTile_ImportExport.Text == "Export") {
+                exportData();
+            }
         }
 
         private void exportData() {
+            //this function exports the datatable to a csv file ready for reimporting later.
             try {
                 //get file path to export
                 SaveFileDialog saveFile = new SaveFileDialog();
@@ -341,18 +344,116 @@ namespace Lap_Tracker {
                     exported = true;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in exportData. Error Message: " +  ex.Message);
             }
         }
 
         private void metroTextBox_LapDistance_Change(object sender, KeyPressEventArgs e) {
+            //this function will check whether a number was entered into the distance text box. It also updates the lap distance slider and global distance variable.
             try {
                 e.Handled = !char.IsDigit(e.KeyChar);
                 int distance = int.TryParse(metroTextBox_LapDistance.Text.ToString(), out distance) ? distance : 0;
                 metroTrackBar_LapDistance.Value = distance;
                 lapDistance = distance;
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in metroTextBox_LapDistance_Change. Error Message: " + ex.Message);
+            }
+        }
+
+        private void importData() {
+            //this function will load a previously exported CSV into the datatable and refresh the data grid.
+            try {
+                //check if data already imported.
+                if  (imported == true) {
+                    //already imported. Check if we want to clear data and import again.
+                    DialogResult reimportDialog = MessageBox.Show("You have already imported data. If you immport again, existing imported data will be overwritten?", "WARNING", MessageBoxButtons.YesNo);
+                    if (reimportDialog == DialogResult.Yes) {
+                        imported = true;
+                        currentRaceDataTable.Clear();
+                        dataGridView1.Refresh();
+
+                    } else if (reimportDialog == DialogResult.No) {
+                        return;
+                    }
+                }
+
+                //get file path to import
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "csv files (*.csv)|*.csv";
+                openFile.RestoreDirectory = true;
+
+                //open file
+                if (openFile.ShowDialog() == DialogResult.OK) {
+                    System.IO.StreamReader sr = new StreamReader(openFile.FileName, false);
+                    //we will read the first row which will contain headers.
+                    string[] headers = sr.ReadLine().Split(',');
+                    while (!sr.EndOfStream) {
+                        //now iterate through each row and add it to the datatable.
+                        string[] rows = sr.ReadLine().Split(',');
+                        DataRow dr = currentRaceDataTable.NewRow();
+                        for (int i = 0; i < headers.Length; i++) {
+                            dr[i] = rows[i];
+                        }
+                        currentRaceDataTable.Rows.Add(dr);
+                    }
+                    imported = true;
+
+                    bindData();
+
+                    //refresh the dataGridView.
+                    dataGridView1.Refresh();
+                }
+            } catch (Exception ex) {
+                MessageBox.Show("Error in importData. Error Message: " + ex.Message);
+            }
+        }
+
+        private void stopRace() {
+            //this function frees up the camera resource and stops the race.
+            try {
+                timer_CamRefresh.Enabled = false;
+                timer_CamRefresh.Stop();
+                finalFrame.Stop();
+                metroTile_StopRace.Enabled = false;
+                metroTrackBar_LapDistance.Enabled = true;
+            } catch (Exception ex) {
+                MessageBox.Show("Error in stopRace. Error Message: " + ex.Message);
+            }
+        }
+
+        private void startRace() {
+            //this function will kick off the camera process, setup the datagrid and enable the timer
+            try {
+                //setup Video Capture
+                finalFrame = new VideoCaptureDevice(captureDevice[metroComboBox_Cameras.SelectedIndex].MonikerString);
+                finalFrame.NewFrame += new NewFrameEventHandler(finalFrame_NewFrame);
+                finalFrame.Start();
+
+                //setup DataGrid
+                bindData();
+
+                //configure start/stop buttons.
+                metroTile_StopRace.Enabled = true;
+                metroTrackBar_LapDistance.Enabled = false;
+                metroTile_ImportExport.Text = "Export";
+
+                //Pause for 4 seconds to allow camera feed to start.
+                Thread.Sleep(4000);
+
+                //Enable timer so scanning can commence.
+                timer_CamRefresh.Enabled = true;
+                timer_CamRefresh.Start();
+            } catch (Exception ex) {
+                MessageBox.Show("Error in startRace. Error Message: " + ex.Message);
+            }
+        }
+
+        private void metroToggle_Sound_CheckedChanged(object sender, EventArgs e) {
+            //this function is invoked when the sound toggle is changed and updates whether a tone will play.
+            if (metroToggle_Sound.Checked == true) {
+                lapSound = true;
+            } else if (metroToggle_Sound.Checked == false) {
+                lapSound = false;
             }
         }
     }

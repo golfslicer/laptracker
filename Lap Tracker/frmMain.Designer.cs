@@ -24,10 +24,10 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.metroTile_Export = new MetroFramework.Controls.MetroTile();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.metroTile_ImportExport = new MetroFramework.Controls.MetroTile();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox_Barcode = new System.Windows.Forms.PictureBox();
             this.metroComboBox_Cameras = new MetroFramework.Controls.MetroComboBox();
@@ -40,49 +40,51 @@
             this.metroLabel_Distance = new MetroFramework.Controls.MetroLabel();
             this.metroTextBox_LapDistance = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroToggle_Sound = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel_Sound = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Barcode)).BeginInit();
             this.SuspendLayout();
             // 
-            // metroTile_Export
+            // metroTile_ImportExport
             // 
-            this.metroTile_Export.Location = new System.Drawing.Point(297, 81);
-            this.metroTile_Export.Name = "metroTile_Export";
-            this.metroTile_Export.Size = new System.Drawing.Size(110, 76);
-            this.metroTile_Export.Style = MetroFramework.MetroColorStyle.Purple;
-            this.metroTile_Export.TabIndex = 8;
-            this.metroTile_Export.Text = "Export";
-            this.metroTile_Export.Click += new System.EventHandler(this.metroTile_Export_Click);
+            this.metroTile_ImportExport.Location = new System.Drawing.Point(297, 81);
+            this.metroTile_ImportExport.Name = "metroTile_ImportExport";
+            this.metroTile_ImportExport.Size = new System.Drawing.Size(110, 76);
+            this.metroTile_ImportExport.Style = MetroFramework.MetroColorStyle.Purple;
+            this.metroTile_ImportExport.TabIndex = 8;
+            this.metroTile_ImportExport.Text = "Export";
+            this.metroTile_ImportExport.Click += new System.EventHandler(this.metroTile_Export_Click);
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(432, 81);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Size = new System.Drawing.Size(444, 543);
             this.dataGridView1.TabIndex = 9;
             // 
@@ -183,11 +185,33 @@
             this.metroLabel1.TabIndex = 20;
             this.metroLabel1.Text = "Built by Chris Scott for Living Waters Lutheran College - 2023";
             // 
+            // metroToggle_Sound
+            // 
+            this.metroToggle_Sound.AutoSize = true;
+            this.metroToggle_Sound.Location = new System.Drawing.Point(91, 226);
+            this.metroToggle_Sound.Name = "metroToggle_Sound";
+            this.metroToggle_Sound.Size = new System.Drawing.Size(80, 17);
+            this.metroToggle_Sound.TabIndex = 21;
+            this.metroToggle_Sound.Text = "Off";
+            this.metroToggle_Sound.UseVisualStyleBackColor = true;
+            this.metroToggle_Sound.CheckedChanged += new System.EventHandler(this.metroToggle_Sound_CheckedChanged);
+            // 
+            // metroLabel_Sound
+            // 
+            this.metroLabel_Sound.AutoSize = true;
+            this.metroLabel_Sound.Location = new System.Drawing.Point(35, 224);
+            this.metroLabel_Sound.Name = "metroLabel_Sound";
+            this.metroLabel_Sound.Size = new System.Drawing.Size(53, 19);
+            this.metroLabel_Sound.TabIndex = 22;
+            this.metroLabel_Sound.Text = "Sound: ";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 638);
+            this.Controls.Add(this.metroLabel_Sound);
+            this.Controls.Add(this.metroToggle_Sound);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroTextBox_LapDistance);
             this.Controls.Add(this.metroLabel_Distance);
@@ -199,7 +223,7 @@
             this.Controls.Add(this.metroComboBox_Cameras);
             this.Controls.Add(this.pictureBox_Barcode);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.metroTile_Export);
+            this.Controls.Add(this.metroTile_ImportExport);
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Resizable = false;
@@ -214,7 +238,7 @@
         }
 
         #endregion
-        private MetroFramework.Controls.MetroTile metroTile_Export;
+        private MetroFramework.Controls.MetroTile metroTile_ImportExport;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox_Barcode;
         private MetroFramework.Controls.MetroComboBox metroComboBox_Cameras;
@@ -227,6 +251,8 @@
         private MetroFramework.Controls.MetroLabel metroLabel_Distance;
         private MetroFramework.Controls.MetroTextBox metroTextBox_LapDistance;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroToggle metroToggle_Sound;
+        private MetroFramework.Controls.MetroLabel metroLabel_Sound;
     }
 }
 
